@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Name</key>
+		<string>Jessica James</string>
+		<key>Desingation</key>
+		<string>Software Engineer</string>
+		<key>DOB</key>
+		<string>17-06-1991</string>
+		<key>ID</key>
+		<string>0883</string>
+		<key>Photo</key>
+		<string>JessicaJames.jpg</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Peter Jackson</string>
+		<key>Desingation</key>
+		<string>Software Test Engineer</string>
+		<key>DOB</key>
+		<string>13-09-1989</string>
+		<key>ID</key>
+		<string>0884</string>
+		<key>Photo</key>
+		<string>PeterJackson.jpg</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Galvin Carter</string>
+		<key>Desingation</key>
+		<string>Senior Software Engineer</string>
+		<key>DOB</key>
+		<string>19-05-1986</string>
+		<key>ID</key>
+		<string>0885</string>
+		<key>Photo</key>
+		<string>GalvinCarter.png</string>
+	</dict>
+</array>
+</plist>
