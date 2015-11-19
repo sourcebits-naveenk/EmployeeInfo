@@ -14,9 +14,15 @@
 
 @implementation EmplyeeInfoViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationItem.title = self.employee.employeeName;
+    self.empNameLabel.text = self.employee.employeeName;
+    self.empImage.image = [UIImage imageNamed:self.employee.employeeImage];
+    self.empIDLabel.text = self.employee.employeeID;
+    self.empDesgnationLabel.text = self.employee.employeeDesignation;
+    self.empDOBLabel.text = self.employee.dateOfBirth;
 }
 
 - (void)didReceiveMemoryWarning {

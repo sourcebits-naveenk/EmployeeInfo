@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) NSString *employeeName;
 @property (nonatomic, strong) NSString *employeeID;
-@property (nonatomic, strong) NSDate *dateOfBirth;
+@property (nonatomic, strong) NSString *dateOfBirth;
 @property (nonatomic, strong) NSString *employeeDesignation;
 @property (nonatomic, strong) NSString *employeeImage;
 

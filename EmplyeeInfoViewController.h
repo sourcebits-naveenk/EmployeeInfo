@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EmployeeInfo.h"
 
 @interface EmplyeeInfoViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *empImage;
@@ -14,5 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *empIDLabel;
 @property (weak, nonatomic) IBOutlet UILabel *empDesgnationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *empDOBLabel;
-
+@property (strong, nonatomic) EmployeeInfo *employee;
 @end
