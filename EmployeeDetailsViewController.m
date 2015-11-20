@@ -16,6 +16,7 @@
     NSMutableArray *detailsFromPlistArray;
     NSInteger selectedIndex;
     NSMutableArray *empDetailsArray;
+    NSString *plistPath;
 }
 
 @end
@@ -27,8 +28,13 @@
     //Registering the Nib
     [_employeesTableView registerNib:[UINib nibWithNibName:@"EmployeeNameViewCell" bundle:nil] forCellReuseIdentifier:@"EmployeeNameCell"];
     self.navigationItem.title = @"Employees";
-    
-    NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"EmployeeDetails" ofType:@"plist"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+     plistPath = [documentsPath stringByAppendingPathComponent:@"EmployeeDetails.plist"];
+    if (![[NSFileManager defaultManager]fileExistsAtPath:plistPath])
+    {
+        plistPath = [[NSBundle mainBundle]pathForResource:@"EmployeeDetails" ofType:@"plist"];
+    }
     detailsFromPlistArray = [[NSMutableArray alloc]initWithContentsOfFile:plistPath];
     empDetailsArray = [[NSMutableArray alloc]init];
     
@@ -78,6 +84,7 @@
      self.employeeInfo = empDetailsArray[selectedIndex];
      EmplyeeInfoViewController *destViewController = (EmplyeeInfoViewController*)segue.destinationViewController;
     destViewController.employee = self.employeeInfo;
+    destViewController.selectedEmployeeIndex = *(&(selectedIndex));
 }
 
 @end

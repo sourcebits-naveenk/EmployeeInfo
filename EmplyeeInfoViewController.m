@@ -10,6 +10,8 @@
 
 @interface EmplyeeInfoViewController ()
 
+
+
 @end
 
 @implementation EmplyeeInfoViewController
@@ -28,6 +30,25 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)updateEmployeeDetailsButton:(id)sender
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"EmployeeDetails.plist"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+    {
+        plistPath = [[NSBundle mainBundle] pathForResource:@"EmployeeDetails" ofType:@"plist"];
+    }
+    NSMutableArray *detailsFromPlistArray = [[NSMutableArray alloc]initWithContentsOfFile:plistPath];
+    NSDictionary *empDetailsDictionary = detailsFromPlistArray[self.selectedEmployeeIndex];
+    [empDetailsDictionary setValue:@"Harish" forKey:@"Name"];
+    [detailsFromPlistArray writeToFile:[documentsPath stringByAppendingPathComponent:@"EmployeeDetails.plist" ]atomically:YES];
+}
+- (IBAction)refreshButton:(id)sender
+{
+    [self.view setNeedsDisplay];
 }
 
 /*
