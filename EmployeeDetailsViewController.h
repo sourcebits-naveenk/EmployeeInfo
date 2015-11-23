@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *employeesTableView;
 @property (strong, nonatomic) EmployeeInfo *employeeInfo;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 
 
 @end

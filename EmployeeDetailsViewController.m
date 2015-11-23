@@ -51,6 +51,11 @@
     }
     _employeesTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 }
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self viewDidLoad];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -86,5 +91,8 @@
     destViewController.employee = self.employeeInfo;
     destViewController.selectedEmployeeIndex = *(&(selectedIndex));
 }
-
+- (IBAction)refreshButton:(id)sender
+{
+    [self.employeesTableView reloadData];
+}
 @end

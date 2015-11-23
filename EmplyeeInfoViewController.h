@@ -12,10 +12,17 @@
 @interface EmplyeeInfoViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *empImage;
-@property (weak, nonatomic) IBOutlet UILabel *empNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *empIDLabel;
-@property (weak, nonatomic) IBOutlet UILabel *empDesgnationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *empDOBLabel;
+@property (weak, nonatomic) IBOutlet UITextField *employeeNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *employeeIDTextField;
+@property (weak, nonatomic) IBOutlet UITextField *employeeDesignationTextField;
+@property (weak, nonatomic) IBOutlet UITextField *employeeDobTextField;
+@property (weak, nonatomic) IBOutlet UILabel *employeeNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *employeeIDLabel;
+@property (weak, nonatomic) IBOutlet UILabel *employeeDesignationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *employeeDobLabel;
+@property (weak, nonatomic) IBOutlet UIButton *refreshButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) EmployeeInfo *employee;
 @property (nonatomic) NSInteger selectedEmployeeIndex;
 
