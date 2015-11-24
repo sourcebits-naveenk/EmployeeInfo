@@ -8,7 +8,6 @@
 
 #import "EmployeeDetailsViewController.h"
 #import "EmplyeeInfoViewController.h"
-#import "UIImage+Resize.h"
 
 @interface EmployeeDetailsViewController ()
 
@@ -17,6 +16,7 @@
     NSInteger selectedIndex;
     NSMutableArray *empDetailsArray;
     NSString *plistPath;
+    NSString *documentsPath;
 }
 
 @end
@@ -29,12 +29,12 @@
     [_employeesTableView registerNib:[UINib nibWithNibName:@"EmployeeNameViewCell" bundle:nil] forCellReuseIdentifier:@"EmployeeNameCell"];
     self.navigationItem.title = @"Employees";
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
+     documentsPath = [paths objectAtIndex:0];
      plistPath = [documentsPath stringByAppendingPathComponent:@"EmployeeDetails.plist"];
     if (![[NSFileManager defaultManager]fileExistsAtPath:plistPath])
-    {
-        plistPath = [[NSBundle mainBundle]pathForResource:@"EmployeeDetails" ofType:@"plist"];
-    }
+ {
+     [self copyPlistFromBundleToDocumentDirectory];
+ }
     detailsFromPlistArray = [[NSMutableArray alloc]initWithContentsOfFile:plistPath];
     empDetailsArray = [[NSMutableArray alloc]init];
     
@@ -54,7 +54,11 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    [self viewDidLoad];
+}
+-(void)copyPlistFromBundleToDocumentDirectory
+{
+   NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"EmployeeDetails" ofType:@"plist"];
+    [[NSFileManager defaultManager] copyItemAtPath:bundlePath toPath:plistPath error:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,6 +97,30 @@
 }
 - (IBAction)refreshButton:(id)sender
 {
+    [self getLatestDataFromPlst];
     [self.employeesTableView reloadData];
+}
+-(void)getLatestDataFromPlst
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    documentsPath = [paths objectAtIndex:0];
+    plistPath = [documentsPath stringByAppendingPathComponent:@"EmployeeDetails.plist"];
+    if ([[NSFileManager defaultManager]fileExistsAtPath:plistPath])
+    {
+        [empDetailsArray removeAllObjects];
+        [detailsFromPlistArray removeAllObjects];
+        detailsFromPlistArray = [NSMutableArray arrayWithContentsOfFile:plistPath];
+    }
+    for(int i = 0; i < detailsFromPlistArray.count; i++)
+    {
+        NSDictionary *empDetailsDictionary = detailsFromPlistArray[i];
+        _employeeInfo = [[EmployeeInfo alloc]init];
+        _employeeInfo.employeeName = empDetailsDictionary[@"Name"];
+        _employeeInfo.employeeImage = empDetailsDictionary[@"Photo"];
+        _employeeInfo.employeeID = empDetailsDictionary[@"ID"];
+        _employeeInfo.employeeDesignation = empDetailsDictionary[@"Desingation"];
+        _employeeInfo.dateOfBirth = empDetailsDictionary[@"DOB"];
+        [empDetailsArray addObject:_employeeInfo];
+    }
 }
 @end

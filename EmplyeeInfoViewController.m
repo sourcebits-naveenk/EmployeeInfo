@@ -70,16 +70,15 @@
     [self.employeeIDTextField setHidden:YES];
     [self.employeeDobLabel setHidden:NO];
     [self.employeeDobTextField setHidden:YES];
+    NSMutableArray *detailsFromPlistArray ;
     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
     NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"EmployeeDetails.plist"];
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+   if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
     {
-        plistPath = [[NSBundle mainBundle] pathForResource:@"EmployeeDetails" ofType:@"plist"];
+         detailsFromPlistArray = [[NSMutableArray alloc]initWithContentsOfFile:plistPath];
     }
-    NSMutableArray *detailsFromPlistArray = [[NSMutableArray alloc]initWithContentsOfFile:plistPath];
-    empDetailsDictionary = detailsFromPlistArray[self.selectedEmployeeIndex];
+        empDetailsDictionary = detailsFromPlistArray[self.selectedEmployeeIndex];
     [empDetailsDictionary setValue:self.employeeNameTextField.text forKey:@"Name"];
     [detailsFromPlistArray writeToFile:[documentsPath stringByAppendingPathComponent:@"EmployeeDetails.plist" ]atomically:YES];
     [empDetailsDictionary setValue:self.employeeIDTextField.text forKey:@"ID"];
